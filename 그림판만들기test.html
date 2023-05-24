@@ -49,13 +49,14 @@
         let flag=false;
         let dotWidth=2; //점의 너비를 결정하는 전역변수
         let dotHeight=2;//점의 높이를 결정하는 전역변수
-        let dotImg="dot.png";
+        let dotImg=["dot_red.png","dot_green.png","dot_blue.png"];
+        let n=0; //dot  이미지의 몇번째 이미지를 보여줄지를 결정하는 index 
 
         //문서내에 점을 표현하는 이미지를 동적으로 생성하여 
         //content에 붙이자(좌표는 마우스의 좌표로 한다..)
         function createDot(x, y){
             let dot=document.createElement("img");
-            dot.src="../images/"+dotImg;
+            dot.src="../images/"+dotImg[n];
             dot.style.width=dotWidth+"px";
             dot.style.height=dotHeight+"px";
             dot.style.position="absolute";
@@ -73,7 +74,10 @@
             blue =document.getElementById("blue");
             bt = document.querySelector("button");
             content = document.getElementById("content");
+
+            
         }
+
         addEventListener("load", function(){
             init();
 
@@ -102,16 +106,16 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <select id="sel">
+            <select id="sel" onchange="dotWidth=parseInt(this.value);dotHeight=parseInt(this.value)">
                 <option value="1">두께선택</option>
                 <option value="1">1</option>
                 <option value="3">3</option>
                 <option value="6">6</option>
                 <option value="9">9</option>
             </select>
-            <div id="red" style="background:red"></div>                
-            <div id="green" style="background:green"></div>                
-            <div id="blue" style="background:blue"></div>                
+            <div id="red" style="background:red" onClick="n=0"></div>                
+            <div id="green" style="background:green" onClick="n=1"></div>                
+            <div id="blue" style="background:blue" onClick="n=2"></div>                
             <button>재생</button>
         </div>
         <div id="content"></div>
